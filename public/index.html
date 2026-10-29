@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESC}}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{DESC}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0B0D10">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-brand"><span class="nav-spark"></span><span id="brand">Portfolio</span></a>
+    <button class="nav-toggle" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    <div class="nav-links" id="links">
+      <a href="#about">About</a>
+      <a href="#skills" data-sec="skills">Skills</a>
+      <a href="#projects" data-sec="projects">Projects</a>
+      <a href="#certs" data-sec="certs">Certificates</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="hero-inner hero-split">
+    <div class="hero-text">
+      <div class="eyebrow"><span class="dot"></span><span id="h-eyebrow">Portfolio</span></div>
+      <h1>Hi, I'm <span class="accent" id="h-name">&nbsp;</span></h1>
+      <p class="typed"><span id="h-typed"></span><i class="caret"></i></p>
+      <p id="h-tag"></p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">See my work</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+      <div class="socials" id="h-social"></div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual-ring"></div>
+      <svg class="hero-orbit-text" viewBox="0 0 460 460" aria-hidden="true">
+        <defs><path id="orbit-path" d="M 230,230 m -204,0 a 204,204 0 1,1 408,0 a 204,204 0 1,1 -408,0" /></defs>
+        <text id="orbit-text"><textPath href="#orbit-path" startOffset="0%" id="orbit-tp"></textPath></text>
+      </svg>
+      <div class="hero-visual-photo"><img id="h-photo" alt="" hidden decoding="async"><span id="h-initial"></span></div>
+    </div>
+  </div>
+</header>
+
+<section class="stats" id="stats" hidden>
+  <div class="stats-grid" id="stats-grid"></div>
+</section>
+
+<section class="section reveal" id="about">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">Who I am</div>
+        <div class="section-title">About</div>
+      </div>
+    </div>
+    <p class="about-text" id="a-text"></p>
+    <p class="about-meta" id="a-meta"></p>
+    <a class="btn btn-primary" id="a-resume" target="_blank" rel="noopener" hidden>Download résumé</a>
+  </div>
+</section>
+
+<section class="section reveal" id="skills" hidden>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">What I know</div>
+        <div class="section-title">Skills</div>
+      </div>
+    </div>
+    <div class="skill-groups" id="s-groups"></div>
+  </div>
+</section>
+
+<section class="section reveal" id="projects" hidden>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">What I've built</div>
+        <div class="section-title">Projects</div>
+      </div>
+    </div>
+    <div class="card-grid" id="p-grid"></div>
+  </div>
+</section>
+
+<section class="section reveal" id="certs" hidden>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">Proof of learning</div>
+        <div class="section-title">Certificates</div>
+      </div>
+    </div>
+    <div class="card-grid certs" id="c-grid"></div>
+  </div>
+</section>
+
+<section class="section reveal" id="contact">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-label">Say hi</div>
+        <div class="section-title">Contact</div>
+      </div>
+    </div>
+    <p class="about-text">Want to work together or just say hi? Reach out.</p>
+    <div class="hero-actions contact-actions" id="k-links" style="opacity:1;animation:none;"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand" id="f-brand"></div>
+      <div class="footer-meta" id="f-meta"></div>
+    </div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <button class="x" id="m-close" aria-label="Close">×</button>
+    <div id="m-body"></div>
+  </div>
+</div>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>

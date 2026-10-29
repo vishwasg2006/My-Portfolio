@@ -1,0 +1,22 @@
+{
+  "name": "portfolio-cms",
+  "version": "1.0.0",
+  "description": "One-page portfolio with a built-in admin panel (edit everything from your phone)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cloudinary": "^2.11.0",
+    "dotenv": "^18.0.9",
+    "express": "^4.22.3",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.5.0",
+    "mysql2": "^3.24.6"
+  }
+}
