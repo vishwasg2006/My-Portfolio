@@ -316,3 +316,13 @@ img { max-width: 100%; display: block; }
 
 /* Focus visibility */
 a:focus-visible, button:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+
+
+.cf { display: grid; gap: 12px; margin-top: 14px; }
+.cf input, .cf textarea {
+  width: 100%; padding: 12px 14px; border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.06);
+  color: inherit; font: inherit; outline: none;
+}
+.cf input:focus, .cf textarea:focus { border-color: #8b7bff; }
+.cf button[disabled] { opacity: .7; cursor: default; }

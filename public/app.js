@@ -149,28 +149,49 @@ function typewriter(node, words) {
 }
 
 
-// ---------- copy email instead of opening a mail window ----------
-document.addEventListener('click', async (e) => {
+// ---------- contact form: visitor types a message, it lands in your inbox ----------
+const WEB3FORMS_KEY = 'PASTE_YOUR_ACCESS_KEY_HERE';
+
+document.addEventListener('click', (e) => {
   const a = e.target.closest('.copy-mail');
   if (!a) return;
   e.preventDefault();
-  const email = a.dataset.email;
-  try {
-    await navigator.clipboard.writeText(email);
-  } catch {
-    const t = document.createElement('textarea');
-    t.value = email;
-    t.style.cssText = 'position:fixed;opacity:0';
-    document.body.appendChild(t);
-    t.select();
-    document.execCommand('copy');
-    t.remove();
-  }
-  if (!a.dataset.label) a.dataset.label = a.textContent;
-  a.textContent = 'Email copied ✓';
-  clearTimeout(a._t);
-  a._t = setTimeout(() => (a.textContent = a.dataset.label), 2000);
+  openModal(`
+    <h3>Send me a message</h3>
+    <form id="cf" class="cf">
+      <input name="name" placeholder="Your name" required>
+      <input name="email" type="email" placeholder="Your email" required>
+      <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+      <button class="btn btn-primary" type="submit">Send message</button>
+      <p id="cf-status" class="desc"></p>
+    </form>`);
 });
+
+document.addEventListener('submit', async (e) => {
+  if (e.target.id !== 'cf') return;
+  e.preventDefault();
+  const f = e.target, st = $('#cf-status'), btn = f.querySelector('button[type=submit]');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  const fd = new FormData(f);
+  fd.append('access_key', WEB3FORMS_KEY);
+  fd.append('subject', 'New message from your portfolio');
+  fd.append('from_name', 'Portfolio Contact');
+  try {
+    const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
+    const j = await r.json();
+    if (!j.success) throw new Error(j.message);
+    f.reset();
+    st.textContent = 'Message sent ✓ I will reply soon.';
+    btn.textContent = 'Sent';
+  } catch (err) {
+    st.textContent = 'Could not send. Please try again later.';
+    btn.disabled = false;
+    btn.textContent = 'Send message';
+  }
+});
+
 
 // ---------- floating spark particles in the hero (same as the club site) ----------
 function initSparkParticles() {
