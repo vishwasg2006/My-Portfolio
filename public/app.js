@@ -42,17 +42,20 @@ function render({ profile: p, projects, certificates, skills }) {
   }
   orbit(p);
 
-  // links
+    // links
   const links = [
     ['GitHub', p.github],
     ['LinkedIn', p.linkedin],
     ['Instagram', p.instagram],
-    ['Email', p.email && `mailto:${p.email}`],
+    ['Email', p.email],
   ].filter(([, u]) => u);
-  const ext = (u) => (u.startsWith('mailto:') ? '' : 'target="_blank" rel="noopener"');
-  $('#h-social').innerHTML = links.map(([l, u]) => `<a href="${esc(u)}" ${ext(u)}>${l}</a>`).join('');
+  const linkHtml = (l, u, cls) =>
+    l === 'Email'
+      ? `<a href="#" class="${cls} copy-mail" data-email="${esc(u)}">Email</a>`
+      : `<a href="${esc(u)}" class="${cls}" target="_blank" rel="noopener">${l}</a>`;
+  $('#h-social').innerHTML = links.map(([l, u]) => linkHtml(l, u, '')).join('');
   $('#k-links').innerHTML = links
-    .map(([l, u]) => `<a class="btn ${l === 'Email' ? 'btn-primary' : 'btn-ghost'}" href="${esc(u)}" ${ext(u)}>${l}</a>`)
+    .map(([l, u]) => linkHtml(l, u, `btn ${l === 'Email' ? 'btn-primary' : 'btn-ghost'}`))
     .join('');
 
   // about
@@ -144,6 +147,30 @@ function typewriter(node, words) {
     setTimeout(tick, del ? 35 : 70);
   })();
 }
+
+
+// ---------- copy email instead of opening a mail window ----------
+document.addEventListener('click', async (e) => {
+  const a = e.target.closest('.copy-mail');
+  if (!a) return;
+  e.preventDefault();
+  const email = a.dataset.email;
+  try {
+    await navigator.clipboard.writeText(email);
+  } catch {
+    const t = document.createElement('textarea');
+    t.value = email;
+    t.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(t);
+    t.select();
+    document.execCommand('copy');
+    t.remove();
+  }
+  if (!a.dataset.label) a.dataset.label = a.textContent;
+  a.textContent = 'Email copied ✓';
+  clearTimeout(a._t);
+  a._t = setTimeout(() => (a.textContent = a.dataset.label), 2000);
+});
 
 // ---------- floating spark particles in the hero (same as the club site) ----------
 function initSparkParticles() {
