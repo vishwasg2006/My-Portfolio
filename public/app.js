@@ -150,7 +150,7 @@ function typewriter(node, words) {
 
 
 // ---------- contact form: visitor types a message, it lands in your inbox ----------
-const WEB3FORMS_KEY = 'PASTE_YOUR_ACCESS_KEY_HERE';
+const WEB3FORMS_KEY = '42d6752b-8cd2-462a-8141-440dcb3c82de';
 
 document.addEventListener('click', (e) => {
   const a = e.target.closest('.copy-mail');
